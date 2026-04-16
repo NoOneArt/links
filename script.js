@@ -1,7 +1,7 @@
 const SITE_CONFIG = {
   seo: {
     title: "NoOne - Links",
-    description: "Minimal dark link page.",
+    description: "3D character artist focused on stylized characters.\nCreating fanart and original characters in Blender.",
     image: "assets/avatar.png",
     url: ""
   },
