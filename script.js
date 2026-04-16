@@ -1,7 +1,9 @@
 const SITE_CONFIG = {
   seo: {
     title: "NoOne - Links",
-    description: "Minimal dark link page."
+    description: "Minimal dark link page.",
+    image: "assets/avatar.png",
+    url: ""
   },
   analytics: {
     measurementId: ""
@@ -85,11 +87,29 @@ function initGoogleAnalytics(measurementId) {
 }
 
 function setSeo() {
-  document.title = SITE_CONFIG.seo.title || "Links";
+  const seo = SITE_CONFIG.seo || {};
+  const title = seo.title || "Links";
+  const description = seo.description || "";
+  const image = seo.image || SITE_CONFIG.profile.avatarUrl || "";
+  const url = seo.url || window.location.href;
+
+  document.title = title;
 
   const metaDescription = document.querySelector('meta[name="description"]');
-  if (metaDescription && SITE_CONFIG.seo.description) {
-    metaDescription.setAttribute("content", SITE_CONFIG.seo.description);
+  setMetaContent('meta[name="description"]', description);
+  setMetaContent('meta[property="og:title"]', title);
+  setMetaContent('meta[property="og:description"]', description);
+  setMetaContent('meta[property="og:image"]', image);
+  setMetaContent('meta[property="og:url"]', url);
+  setMetaContent('meta[name="twitter:title"]', title);
+  setMetaContent('meta[name="twitter:description"]', description);
+  setMetaContent('meta[name="twitter:image"]', image);
+}
+
+function setMetaContent(selector, content) {
+  const element = document.querySelector(selector);
+  if (element && content) {
+    element.setAttribute("content", content);
   }
 }
 
